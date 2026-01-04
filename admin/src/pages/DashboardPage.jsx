@@ -162,7 +162,7 @@ export default function DashboardPage() {
         <Grid item xs={12} md={4}>
           <AlertsPanel alerts={alerts} loading={loadingAlerts} />
         </Grid>
-      </Grid>
+      </Grid>    Get-Content .\downloaded-artifacts\backfill-dashboard-verbose-2026-W01\backfill-dashboard-verbose-2026-W01.json | ConvertFrom-Json | Select-Object -First 20 | Format-Table -AutoSize
     </Container>
     </>
   )
