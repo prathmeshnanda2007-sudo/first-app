@@ -42,8 +42,13 @@ jobs:
           echo "Wrote service account to /tmp/sa.json"
 
       - name: Install function deps
-        run: npm ci
-        working-directory: firebase/functions
+        run: |
+          # Prefer clean install with package-lock if present, otherwise fall back to npm install
+          if [ -f firebase/functions/package-lock.json ]; then
+            npm ci --prefix firebase/functions
+          else
+            npm install --prefix firebase/functions --no-audit --no-fund
+          fi
 
       - name: Run backfill (dry-run or run)
         env:
