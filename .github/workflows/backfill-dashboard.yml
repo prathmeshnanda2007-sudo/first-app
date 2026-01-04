@@ -26,11 +26,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node.js (LTS) and cache
+      - name: Setup Node.js (LTS)
         uses: actions/setup-node@v4
         with:
           node-version: 'lts/*'
-          cache: 'npm'
+          # NOTE: cache disabled temporarily to avoid requiring a root package-lock.json
+          # This is a short-term workaround; revert when a root lockfile is added for reproducibility.
 
       - name: Configure service account
         env:
