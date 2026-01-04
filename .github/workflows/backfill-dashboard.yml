@@ -1,0 +1,71 @@
+name: Backfill Dashboard Summaries
+
+on:
+  workflow_dispatch:
+    inputs:
+      week:
+        description: 'Target ISO week (YYYY-Www). If empty, uses current ISO week.'
+        required: false
+      dry_run:
+        description: 'Run in dry mode (no writes)'
+        required: false
+        default: 'true'
+      verbose:
+        description: 'Produce a verbose CSV/JSON artifact listing all weekly docs for the week (dry-run only)'
+        required: false
+        default: 'false'
+      project_id:
+        description: 'Firebase project id for target environment (staging)'
+        required: true
+
+jobs:
+  backfill:
+    runs-on: ubuntu-latest
+    permissions: write-all
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js (LTS) and cache
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+          cache: 'npm'
+
+      - name: Configure service account
+        env:
+          SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
+        run: |
+          if [ -z "$SERVICE_ACCOUNT" ]; then echo "Missing SERVICE_ACCOUNT secret" && exit 1; fi
+          echo "$SERVICE_ACCOUNT" > /tmp/sa.json
+          echo "Wrote service account to /tmp/sa.json"
+
+      - name: Install function deps
+        run: npm ci
+        working-directory: firebase/functions
+
+      - name: Run backfill (dry-run or run)
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: /tmp/sa.json
+          FIREBASE_PROJECT: ${{ github.event.inputs.project_id }}
+        run: |
+          ARGS=""
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ] || [ "${{ github.event.inputs.dry_run }}" = "True" ]; then
+            ARGS="$ARGS --dry"
+          fi
+          if [ -n "${{ github.event.inputs.week }}" ]; then
+            ARGS="$ARGS --week=${{ github.event.inputs.week }}"
+          fi
+          if [ "${{ github.event.inputs.verbose }}" = "true" ] || [ "${{ github.event.inputs.verbose }}" = "True" ]; then
+            ARGS="$ARGS --verbose"
+          fi
+          echo "Running: npm run backfill:dashboard -- $ARGS"
+          npm run backfill:dashboard -- $ARGS
+        working-directory: firebase/functions
+
+      - name: Upload verbose artifacts (if any)
+        if: ${{ github.event.inputs.verbose == 'true' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: backfill-verbose-${{ github.event.inputs.week || 'current' }}
+          path: firebase/functions/artifacts/*
