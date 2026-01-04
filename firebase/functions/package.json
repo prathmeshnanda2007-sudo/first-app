@@ -1,0 +1,28 @@
+{
+  "name": "messcheck-functions",
+  "version": "0.1.0",
+  "engines": {
+    "node": "18"
+  },
+  "dependencies": {
+    "firebase-admin": "^11.5.0",
+    "firebase-functions": "^4.4.0"
+  },
+  "devDependencies": {
+    "mocha": "^10.2.0",
+    "chai": "^4.3.8",
+    "firebase-functions-test": "^0.3.3"
+    ,"minimist": "^1.2.8"
+  },
+  "engines": {
+    "node": "18"
+  },
+  "scripts": {
+    "test": "mocha --exit",
+    "test:mocha": "mocha --timeout 10000 'test/**/*.test.js'",
+    "emulator:test": "firebase emulators:exec --only firestore \"npm run test:mocha\"",
+    "backfill:weekly": "node tools/backfillWeekly.js",
+    "backfill:dashboard": "node tools/backfillDashboardSummaries.js"
+  },
+  "private": true
+}
