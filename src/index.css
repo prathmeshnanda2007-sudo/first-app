@@ -1,0 +1,163 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Lora:ital,wght@0,400..700;1,400..700&family=IBM+Plex+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* ⚠️ AGENT MUST REPLACE: These are placeholder colors. You MUST define a custom palette before writing components. */
+    /* The template uses distinctive placeholder colors to force customization - do NOT use these in production! */
+    
+    /* 
+     * EXAMPLE PALETTES (use as inspiration, replace with your own):
+     * 
+     * Modern SaaS (Business/Enterprise):
+     * --primary: 217 91% 60%;        (Blue #2563EB)
+     * --accent: 217 91% 65%;         (Lighter blue #3B82F6)
+     * 
+     * Bold Tech (Startups/Developer Tools):
+     * --primary: 262 83% 58%;        (Purple #8B5CF6)
+     * --accent: 262 83% 68%;         (Lighter purple #A855F7)
+     * 
+     * Quantum Rose (Creative/Design):
+     * --primary: 330 81% 50%;        (Pink #E6067A)
+     * --accent: 330 81% 70%;         (Lighter pink #F472B6)
+     * 
+     * Ocean Depth (Calm/Professional):
+     * --primary: 200 98% 39%;        (Deep teal #0D9488)
+     * --accent: 200 98% 50%;         (Teal #14B8A6)
+     * 
+     * Sunset Warmth (Friendly/Welcoming):
+     * --primary: 24 95% 53%;         (Orange #F97316)
+     * --accent: 24 95% 63%;          (Lighter orange #FB923C)
+     */
+    
+    /* Colors - Calming Mental Wellness Palette (Blues, Greens, Soft Purples) */
+    --background: 220 15% 98%;
+    --foreground: 220 15% 15%;
+    --card: 0 0% 100%;
+    --card-foreground: 220 15% 15%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 15% 15%;
+    /* Primary: Calming Blue */
+    --primary: 210 75% 55%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 150 30% 95%;
+    --secondary-foreground: 220 15% 15%;
+    --muted: 220 15% 96%;
+    --muted-foreground: 220 10% 50%;
+    /* Accent: Soft Teal */
+    --accent: 175 60% 50%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 15% 90%;
+    --input: 220 15% 90%;
+    --ring: 210 75% 55%;
+
+    /* Charts - Wellness Color Spectrum */
+    --chart-1: 210 75% 55%;
+    --chart-2: 175 60% 50%;
+    --chart-3: 270 50% 60%;
+    --chart-4: 140 50% 55%;
+    --chart-5: 200 65% 60%;
+
+    /* Sidebar - Calming Tones */
+    --sidebar: 220 15% 98%;
+    --sidebar-foreground: 220 15% 15%;
+    --sidebar-primary: 210 75% 55%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 175 60% 50%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 220 15% 90%;
+    --sidebar-ring: 210 75% 55%;
+
+    /* Fonts */
+    --font-sans: DM Sans, sans-serif;
+    --font-serif: Lora, serif;
+    --font-mono: IBM Plex Mono, monospace;
+
+    /* Shadows */
+    --shadow-2xs: 0px 4px 8px -1px hsl(0 0% 0% / 0.05);
+    --shadow-xs: 0px 4px 8px -1px hsl(0 0% 0% / 0.05);
+    --shadow-sm: 0px 4px 8px -1px hsl(0 0% 0% / 0.10), 0px 1px 2px -2px hsl(0 0% 0% / 0.10);
+    --shadow: 0px 4px 8px -1px hsl(0 0% 0% / 0.10), 0px 1px 2px -2px hsl(0 0% 0% / 0.10);
+    --shadow-md: 0px 4px 8px -1px hsl(0 0% 0% / 0.10), 0px 2px 4px -2px hsl(0 0% 0% / 0.10);
+    --shadow-lg: 0px 4px 8px -1px hsl(0 0% 0% / 0.10), 0px 4px 6px -2px hsl(0 0% 0% / 0.10);
+    --shadow-xl: 0px 4px 8px -1px hsl(0 0% 0% / 0.10), 0px 8px 10px -2px hsl(0 0% 0% / 0.10);
+    --shadow-2xl: 0px 4px 8px -1px hsl(0 0% 0% / 0.25);
+
+    /* Misc */
+    --tracking-normal: 0em;
+    --spacing: 0.25rem;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    /* Dark Mode - Calming Night Palette */
+    --background: 220 20% 8%;
+    --foreground: 220 15% 92%;
+    --card: 220 18% 12%;
+    --card-foreground: 220 15% 92%;
+    --popover: 220 18% 12%;
+    --popover-foreground: 220 15% 92%;
+    /* Primary: Soft Blue */
+    --primary: 210 70% 60%;
+    --primary-foreground: 220 20% 8%;
+    --secondary: 220 18% 15%;
+    --secondary-foreground: 220 15% 92%;
+    --muted: 220 18% 12%;
+    --muted-foreground: 220 10% 60%;
+    --accent: 175 55% 55%;
+    --accent-foreground: 220 20% 8%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 220 20% 8%;
+    --border: 220 18% 20%;
+    --input: 220 18% 20%;
+    --ring: 210 70% 60%;
+
+    /* Charts - Dark Mode Wellness Colors */
+    --chart-1: 210 70% 60%;
+    --chart-2: 175 55% 55%;
+    --chart-3: 270 45% 65%;
+    --chart-4: 140 45% 60%;
+    --chart-5: 200 60% 65%;
+
+    /* Sidebar - Dark Mode */
+    --sidebar: 220 18% 12%;
+    --sidebar-foreground: 220 15% 92%;
+    --sidebar-primary: 210 70% 60%;
+    --sidebar-primary-foreground: 220 20% 8%;
+    --sidebar-accent: 175 55% 55%;
+    --sidebar-accent-foreground: 220 20% 8%;
+    --sidebar-border: 220 18% 20%;
+    --sidebar-ring: 210 70% 60%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-sans), 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+    letter-spacing: var(--tracking-normal);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
